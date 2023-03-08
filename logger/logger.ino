@@ -139,19 +139,17 @@ void AddressRegistry_3100() {
   }
 }
 
-void AddressRegistry_3106()
-{
+void AddressRegistry_3106() {
   result = node.readInputRegisters(0x3106, 2);
 
   if (result == node.ku8MBSuccess) {
-    battChargePower = (node.getResponseBuffer(0x00) | node.getResponseBuffer(0x01) << 16)  / 100.0f;
+    battChargePower = (node.getResponseBuffer(0x00) | node.getResponseBuffer(0x01) << 16) / 100.0f;
     Serial.print("Battery Charge Power: ");
     Serial.println(battChargePower);
   }
 }
 
-void AddressRegistry_310D()
-{
+void AddressRegistry_310D() {
   result = node.readInputRegisters(0x310D, 3);
 
   if (result == node.ku8MBSuccess) {
@@ -200,17 +198,16 @@ void AddressRegistry_331B() {
 
 
 #define p_ledtick LED_BUILTIN
-int ledState = LOW; 
+int ledState = LOW;
 unsigned long previousMillis = 0;
 
 #define RXD2 16
 #define TXD2 17
 
-void setup()
-{
+void setup() {
   Serial.begin(defaultBaudRate);
   Serial2.begin(defaultBaudRate);
-  
+
   // Modbus slave ID 1
   node.begin(1, Serial2);
 
@@ -221,22 +218,19 @@ void setup()
 
   pinMode(p_ledtick, OUTPUT);
 
-
+  delay(2000);
   Serial.println("Setup OK!");
   Serial.println("----------------------------");
   Serial.println();
 }
 
-void loop()
-{
+void loop() {
   unsigned long currentMillis = millis();
   const long interval = 5000;
-  if (currentMillis - previousMillis >= interval) 
-  {
+  if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
 
-    if (ledState == LOW) 
-    {
+    if (ledState == LOW) {
       ledState = HIGH;
     } else {
       ledState = LOW;

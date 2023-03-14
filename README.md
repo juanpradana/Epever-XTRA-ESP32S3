@@ -1,4 +1,4 @@
-# Epever-XTRA-Arduino
+# Epever-XTRA-ESP32S3
 ## Diagram
 - Wiring
 ![EPEVER XTRA 4415N](https://user-images.githubusercontent.com/30497994/224992728-606a311b-c903-4a65-a154-52b0e8b32664.png)

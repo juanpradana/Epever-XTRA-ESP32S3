@@ -14,6 +14,12 @@ bool loadPoweredOn = true;
 
 ModbusMaster node;
 
+void preTransmission() {
+}
+
+void postTransmission() {
+}
+
 // A list of the regisities to query in order
 typedef void (*RegistryList[])();
 
@@ -127,7 +133,7 @@ void AddressRegistry_331B() {
 }
 
 
-// #define p_ledtick LED_BUILTIN
+#define p_ledtick LED_BUILTIN
 int ledState = LOW;
 unsigned long previousMillis = 0;
 
@@ -137,6 +143,12 @@ void setup() {
 
   // Modbus slave ID 1
   node.begin(1, Serial1);
+
+  // callbacks to toggle DE + RE on MAX485
+  node.preTransmission(preTransmission);
+  node.postTransmission(postTransmission);
+
+  pinMode(p_ledtick, OUTPUT);
 
   delay(2000);
   Serial.println("Setup OK!");
@@ -155,6 +167,8 @@ void loop() {
     } else {
       ledState = LOW;
     }
+
+    digitalWrite(p_ledtick, ledState);
 
     executeCurrentRegistryFunction();
     nextRegistryNumber();

@@ -14,12 +14,6 @@ bool loadPoweredOn = true;
 
 ModbusMaster node;
 
-void preTransmission() {
-}
-
-void postTransmission() {
-}
-
 // A list of the regisities to query in order
 typedef void (*RegistryList[])();
 
@@ -43,78 +37,10 @@ void nextRegistryNumber() {
   }
 }
 
-// ****************************************************************************
-
-// --------------------------------------------------------------------------------
-
-
 // exec a function of registry read (cycles between different addresses)
 void executeCurrentRegistryFunction() {
   Registries[currentRegistryNumber]();
 }
-
-// // ------TANDA -------------
-
-// uint8_t setOutputLoadPower(uint8_t state) {
-//   Serial.print("Writing coil 0x0006 value to: ");
-//   Serial.println(state);
-
-//   delay(10);
-//   // Set coil at address 0x0006 (Force the load on/off)
-//   result = node.writeSingleCoil(0x0006, state);
-
-//   if (result == node.ku8MBSuccess) {
-//     node.getResponseBuffer(0x00);
-//     Serial.println("Success.");
-//   }
-
-//   return result;
-// }
-
-// // callback to on/off button state changes from the Blynk app
-
-
-// uint8_t readOutputLoadState() {
-//   delay(10);
-//   result = node.readHoldingRegisters(0x903D, 1);
-
-//   if (result == node.ku8MBSuccess) {
-//     loadPoweredOn = (node.getResponseBuffer(0x00) & 0x02) > 0;
-
-//     Serial.print("Set success. Load: ");
-//     Serial.println(loadPoweredOn);
-//   } else {
-//     // update of status failed
-//     Serial.println("readHoldingRegisters(0x903D, 1) failed!");
-//   }
-//   return result;
-// }
-
-// // reads Load Enable Override coil
-// uint8_t checkLoadCoilState() {
-//   Serial.print("Reading coil 0x0006... ");
-
-//   delay(10);
-//   result = node.readCoils(0x0006, 1);
-
-//   Serial.print("Result: ");
-//   Serial.println(result);
-
-//   if (result == node.ku8MBSuccess) {
-//     loadPoweredOn = (node.getResponseBuffer(0x00) > 0);
-
-//     Serial.print(" Value: ");
-//     Serial.println(loadPoweredOn);
-//   } else {
-//     Serial.println("Failed to read coil 0x0006!");
-//   }
-
-//   return result;
-// }
-
-// ------TANDA -------------
-
-// -----------------------------------------------------------------
 
 void AddressRegistry_3100() {
   result = node.readInputRegisters(0x3100, 6);
@@ -207,17 +133,10 @@ unsigned long previousMillis = 0;
 
 void setup() {
   Serial.begin(defaultBaudRate);
-  Serial1.begin(115200, SERIAL_8N1, 4, 5); //rx 4, tx 5
+  Serial1.begin(defaultBaudRate, SERIAL_8N1, 4, 5);  //rx 4, tx 5
 
   // Modbus slave ID 1
   node.begin(1, Serial1);
-
-  // callbacks to toggle DE + RE on MAX485
-  node.preTransmission(preTransmission);
-  node.postTransmission(postTransmission);
-
-
-  // pinMode(p_ledtick, OUTPUT);
 
   delay(2000);
   Serial.println("Setup OK!");
@@ -236,8 +155,6 @@ void loop() {
     } else {
       ledState = LOW;
     }
-
-    // digitalWrite(p_ledtick, ledState);
 
     executeCurrentRegistryFunction();
     nextRegistryNumber();

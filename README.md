@@ -1,4 +1,5 @@
 # Epever-XTRA-ESP32S3
+This repository explain how to parse data from epever solar charge controller use ESP32S3 from RS485 ModBus.
 
 ## Register Reference
 [ModBus Register Reference](https://github.com/juanpradana/Epever-XTRA-ESP32S3/blob/main/ControllerProtocolV2.3.pdf)

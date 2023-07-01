@@ -31,6 +31,7 @@
 ## Result
 
 ![result](https://user-images.githubusercontent.com/30497994/224994304-6e362049-2dbe-4dad-ba6b-b7c004cc81b5.png)
+Tested on MPPT 40A 48v EPEVER XTRA 4415N
 
 
 ## thanks to

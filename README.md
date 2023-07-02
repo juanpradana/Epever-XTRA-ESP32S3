@@ -4,17 +4,17 @@ This repository explain how to parse data from epever solar charge controller us
 ## Register Reference
 [ModBus Register Reference](https://github.com/juanpradana/Epever-XTRA-ESP32S3/blob/main/ControllerProtocolV2.3.pdf)
 
+## Hardware
+- SCC Epever Xtra
+- ESP32 S3
+- 2 way rs-485 to TTL converter
+
 ## Diagram
 - Wiring
 ![EPEVER XTRA 4415N](https://user-images.githubusercontent.com/30497994/224992728-606a311b-c903-4a65-a154-52b0e8b32664.png)
 
 - Device
 ![IMG_20230314_185140-min](https://user-images.githubusercontent.com/30497994/224994149-62e250bc-a056-43a6-ba85-973a52fead6b.jpg)
-
-## Hardware
-- SCC Epever Xtra
-- ESP32 S3
-- 2 way rs-485 to TTL converter
 
 ## Wire
 - microcontroller to rs485 module

@@ -14,7 +14,7 @@ This repository explain how to parse data from epever solar charge controller us
 ## Hardware
 - SCC Epever Xtra
 - ESP32 S3
-- DFRobot Multi Converter
+- 2 way rs-485 to TTL converter
 
 ## Wire
 - microcontroller to rs485 module
